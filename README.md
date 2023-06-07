@@ -21,8 +21,8 @@ My application allows the user to sign in to the specific app sending data to th
 
 
 ### Getting Files
-1. Clone the repository: `git clone https://github.com/Nkathaglow/sin-front`
-2. Navigate to the project directory: `cd sin-front`
+1. Clone the repository: `git clone https://github.com/Nkathaglow/sin-front2`
+2. Navigate to the project directory: `cd sin-front2`
 3. Install the dependencies: `npm install`
 
 ## How To Run It
@@ -30,7 +30,7 @@ My application allows the user to sign in to the specific app sending data to th
 2. Open your web browser and visit: `http://localhost:3000`
 
 ## Live Link
-Or you can access the web application directly via this [LINK.](link.com/)
+Or you can access the web application directly via this [https://sin-front2-git-main-nkathaglow.vercel.app/]
 *****
 ## Dependencies
 - Google
