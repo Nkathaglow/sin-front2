@@ -1,6 +1,7 @@
 import React from 'react';
 import  { useState } from 'react';
-import NavBar from './NavBar';
+
+
 
 const Main = () => {
   const [searchTerm, setSearchTerm ] = useState('');
@@ -19,7 +20,7 @@ const Main = () => {
 
   return (
     <>
-    <NavBar />
+    
       <div className="header">
         <div className="row1">
           <h1>A room without books is like <br></br>a body without a soul.</h1>
@@ -31,7 +32,7 @@ const Main = () => {
           
           </div>
           <img
-            src="https://media.istockphoto.com/id/1140772541/vector/kids-reading-group-of-friends.jpg?s=612x612&w=0&k=20&c=rNtK_-skAB382XDhExCBasJ9wApCdlC_RVx4imMv5MM="
+            src="https://c4.wallpaperflare.com/wallpaper/479/101/113/germany-saxony-gorlitz-hall-historical-literature-wallpaper-preview.jpg"
             alt=""
           />
         </div>

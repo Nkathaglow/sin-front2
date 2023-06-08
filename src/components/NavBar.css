@@ -1,86 +1,52 @@
 .navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-  }
-  
-  .navbar-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-  }
-  
-  .navbar-brand a {
-    color: #fffefe;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 24px;
-  }
-  
-  .navbar-toggle {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    color: #fff;
-    left: 0;
-    align-items: center;
-  }
-  
-  .toggle-icon {
-    display: flex;
-    width: 80px;
-    height: 20px;
-    color: #fff;
-    background-color: #6b6161;
-    position: relative;
-  }
-  
-  .toggle-icon::before,
-  .toggle-icon::after {
-    content: '';
-    position: relative;
-    width: 20px;
-    height: 2px;
-    background-color: #fff;
-  }
-  
-  .toggle-icon::before {
-    top: -6px;
-  }
-  
-  .toggle-icon::after {
-    bottom: -6px;
-  }
-  
-  .navbar-menu {
-    display: none;
-  }
-  
-  .navbar-menu.active {
-    display: block;
-  }
-  
-  .navbar-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-  }
-  
-  .navbar-links li {
-    margin-right: 40px;
-  }
-  
-  .navbar-links a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    position: absolute;
-  }
-  
-  .navbar-links a:hover {
-    text-decoration: underline;
-  }
-  
+  background-color: rgb(104, 61, 32);
+  color: #fff;
+  padding: 10px;
+}
+
+.navbar-container {
+  display: flex;
+  background-color: #755139FF;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand a {
+  background-color: rgb(109, 68, 40);
+  color: #fffefe;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.navbar-menu {
+  background-color: rgb(92, 48, 18);
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.navbar-links {
+  background-color: #755139FF;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar-links li {
+  background-color: #755139FF;
+  margin-left: 10px;
+}
+
+.navbar-links a {
+  background-color: #755139FF;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+}

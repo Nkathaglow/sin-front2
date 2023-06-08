@@ -30,7 +30,7 @@ My application allows the user to sign in to the specific app sending data to th
 2. Open your web browser and visit: `http://localhost:3000`
 
 ## Live Link
-Or you can access the web application directly via this [https://sin-front2-git-main-nkathaglow.vercel.app/]
+Or you can access the web application directly via this [npm start]
 *****
 ## Dependencies
 - Google

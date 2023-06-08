@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import NavBar from './NavBar';
+import Main from './Main';
 import './Home.css';
+
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -13,6 +16,7 @@ const Home = () => {
     genre: '',
   });
   const [searchResults, setSearchResults] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -91,42 +95,35 @@ const Home = () => {
     setSearchResults(filteredData);
   };
 
-  const updateBook = async () => {
-    try {
-      const response = await fetch(`http://localhost:9292/${selectedItem.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(selectedItem),
-      });
-      if (response.ok) {
-        const updatedBook = await response.json();
-        setData(data.map((book) => (book.id === updatedBook.id ? updatedBook : book)));
-        closeModal();
-      } else {
-        console.error('Error updating book:', response.status);
-      }
-    } catch (error) {
-      console.error('Error updating book:', error);
-    }
-  };
+  const updateBook = async (event) => {
+  event.preventDefault(); // Prevents the default form submission
 
-  const handleEditInputChange = (event) => {
-    const { name, value } = event.target;
-    setSelectedItem((prevItem) => ({
-      ...prevItem,
-      [name]: value,
-    }));
-  };
+  try {
+    // Rest of the code...
+  } catch (error) {
+    console.error('Error updating book:', error);
+  }
+};
+
+const handleEditInputChange = (event) => {
+  event.preventDefault(); // Prevents the default form behavior
+
+  const { name, value } = event.target;
+  setSelectedItem((prevItem) => ({
+    ...prevItem,
+    [name]: value,
+  }));
+};
+
 
   return (
     <div className="Home">
+      <NavBar />
+      <Main />
       <h1>The Novels</h1>
 
-      <div className='row2'>
-        <h2>Find Your Book</h2>
-        <div className='search'>
+      <div className="row2">
+        <div className="search">
           <form onSubmit={handleSearch}>
             <input type="text" name="search" placeholder="Enter Book Name" />
             <button type="submit">Search</button>
@@ -154,66 +151,72 @@ const Home = () => {
             ))}
       </ul>
 
-      <h2>Create a New Book</h2>
-      <form>
-        <label>Title:</label>
-        <input
-          type="text"
-          name="title"
-          value={newBook.title}
-          onChange={handleInputChange}
-        />
-        <br />
+      <button type="button" onClick={() => setIsModalOpen(true)}>
+        Create a New Book
+      </button>
 
-        <label>Description:</label>
-        <input
-          type="text"
-          name="description"
-          value={newBook.description}
-          onChange={handleInputChange}
-        />
-        <br />
+      {isModalOpen && (
+        <Modal
+          isOpen={true}
+          onRequestClose={closeModal}
+          contentLabel="Create a New Book"
+        >
+          <h2>Create a New Book</h2>
+          <form>
+            <label>Title:</label>
+            <input
+              type="text"
+              name="title"
+              value={newBook.title}
+              onChange={handleInputChange}
+            />
+            <br />
 
-        <label>Author:</label>
-        <input
-          type="text"
-          name="author"
-          value={newBook.author}
-          onChange={handleInputChange}
-        />
-        <br />
+            <label>Description:</label>
+            <input
+              type="text"
+              name="description"
+              value={newBook.description}
+              onChange={handleInputChange}
+            />
+            <br />
 
-        <label>Poster:</label>
-        <input
-          type="text"
-          name="poster"
-          value={newBook.poster}
-          onChange={handleInputChange}
-        />
-        <br />
+            <label>Author:</label>
+            <input
+              type="text"
+              name="author"
+              value={newBook.author}
+              onChange={handleInputChange}
+            />
+            <br />
 
-        <label>Amount:</label>
-        <input
-          type="text"
-          name="amount"
-          value={newBook.amount}
-          onChange={handleInputChange}
-        />
-        <br />
+            <label>Amount:</label>
+            <input
+              type="text"
+              name="amount"
+              value={newBook.amount}
+              onChange={handleInputChange}
+            />
+            <br />
 
-        <label>Genre:</label>
-        <input
-          type="text"
-          name="genre"
-          value={newBook.genre}
-          onChange={handleInputChange}
-        />
-        <br />
+            <label>Genre:</label>
+            <input
+              type="text"
+              name="genre"
+              value={newBook.genre}
+              onChange={handleInputChange}
+            />
+            <br />
 
-        <button type="button" onClick={createBook}>
-          Create
-        </button>
-      </form>
+            <button type="submit" onClick={createBook}>
+              Submit
+            </button>
+            <button type="button" onClick={closeModal}>
+              Cancel
+            </button>
+          </form>
+        </Modal>
+      )}
 
       {selectedItem && (
         <Modal
@@ -227,7 +230,7 @@ const Home = () => {
           <p>Amount: {selectedItem.amount}</p>
           <p>Genre: {selectedItem.genre}</p>
           
-          
+
           <h2>Edit Book</h2>
           <form>
             <label>Title:</label>

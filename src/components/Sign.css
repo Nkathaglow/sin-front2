@@ -1,76 +1,67 @@
 .dropdown {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .dropdown h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .dropdown form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .dropdown label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .dropdown input {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .dropdown button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .notification {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border-radius: 4px;
-    animation: fadeOut 2s ease-in-out;
-  }
-  
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-  }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #755139FF;
+  border: 1px solid #D4B996FF;;
+  border-radius: 28px;
+}
 
-  .Home .search {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    margin-left: 50px;
+.dropdown h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.dropdown form {
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  background-color: #D4B996FF;
+}
+
+.dropdown label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  background-color: transparent;
+
+}
+
+.dropdown input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #D4B996FF;
+  border-radius: 4px;
+}
+
+.dropdown button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #D4B996FF;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.notification {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: #D4B996FF;
+  color: #fff;
+  border-radius: 4px;
+  animation: fadeOut 2s ease-in-out;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
   }
-  
-  .Home .search form {
-    display: flex;
-    align-items: center;
-    margin-left: 50px;
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
   }
+}
