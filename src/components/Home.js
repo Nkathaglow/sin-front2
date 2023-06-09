@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import NavBar from './NavBar';
-import Main from './Main';
 import './Home.css';
-
+import Main from './Main';
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -14,9 +13,10 @@ const Home = () => {
     author: '',
     amount: '',
     genre: '',
+    image_url: ''
   });
-  const [searchResults, setSearchResults] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -34,7 +34,7 @@ const Home = () => {
 
   const createBook = async () => {
     try {
-      const response = await fetch('http://localhost:9292/', {
+      const response = await fetch('http://localhost:9292/books', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,15 +49,39 @@ const Home = () => {
         author: '',
         amount: '',
         genre: '',
+        image_url: ''
       });
+      closeModal();
     } catch (error) {
       console.error('Error creating book:', error);
     }
   };
 
+  const updateBook = async (event) => {
+    event.preventDefault(); // Prevents the default form submission
+  
+    try {
+      // Rest of the code...
+    } catch (error) {
+      console.error('Error updating book:', error);
+    }
+  };
+  
+  const handleEditInputChange = (event) => {
+    event.preventDefault(); // Prevents the default form behavior
+  
+    const { name, value } = event.target;
+    setSelectedItem((prevItem) => ({
+      ...prevItem,
+      [name]: value,
+    }));
+  };
+
+  
+
   const deleteBook = async (bookId) => {
     try {
-      await fetch(`http://localhost:9292/${bookId}`, {
+      await fetch(`http://localhost:9292/books/${bookId}`, {
         method: 'DELETE',
       });
       setData(data.filter((book) => book.id !== bookId));
@@ -68,10 +92,19 @@ const Home = () => {
 
   const openModal = (book) => {
     setSelectedItem(book);
+    setIsEditMode(true);
+    setIsModalOpen(true);
+  };
+
+  const openAddModal = () => {
+    setIsEditMode(false);
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setSelectedItem(null);
+    setIsEditMode(false);
+    setIsModalOpen(false);
   };
 
   const handleInputChange = (event) => {
@@ -82,135 +115,114 @@ const Home = () => {
     }));
   };
 
-  const handleSearch = (event) => {
-    event.preventDefault();
-    const searchValue = event.target.elements.search.value;
-
-    // Perform search logic here
-    const filteredData = data.filter((item) => {
-      // Assuming you want to search by book title
-      return item.title.toLowerCase().includes(searchValue.toLowerCase());
-    });
-
-    setSearchResults(filteredData);
-  };
-
-  const updateBook = async (event) => {
-  event.preventDefault(); // Prevents the default form submission
-
-  try {
-    // Rest of the code...
-  } catch (error) {
-    console.error('Error updating book:', error);
-  }
-};
-
-const handleEditInputChange = (event) => {
-  event.preventDefault(); // Prevents the default form behavior
-
-  const { name, value } = event.target;
-  setSelectedItem((prevItem) => ({
-    ...prevItem,
-    [name]: value,
-  }));
-};
-
-
   return (
     <div className="Home">
+      
       <NavBar />
       <Main />
       <h1>The Novels</h1>
 
-      <div className="row2">
-        <div className="search">
-          <form onSubmit={handleSearch}>
-            <input type="text" name="search" placeholder="Enter Book Name" />
-            <button type="submit">Search</button>
-          </form>
-        </div>
+      <div className="search">
+        <form>
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={newBook.title}
+            onChange={handleInputChange}
+          />
+          <button type="button" onClick={openAddModal}>
+            Add Book
+          </button>
+        </form>
       </div>
 
       <ul>
-        {searchResults.length > 0
-          ? searchResults.map((item) => (
-              <li key={item.id}>
-                <button onClick={() => openModal(item)}>
-                  <img src={item.poster} alt="Book cover" />
-                </button>
-                <button onClick={() => deleteBook(item.id)}>Delete</button>
-              </li>
-            ))
-          : data.map((item) => (
-              <li key={item.id}>
-                <button onClick={() => openModal(item)}>
-                  <img src={item.poster} alt="Book cover" />
-                </button>
-                <button onClick={() => deleteBook(item.id)}>Delete</button>
-              </li>
-            ))}
+        {data.map((item) => (
+          <li key={item.id}>
+            <button onClick={() => openModal(item)}>
+              <img src={item.poster} alt="Book cover" />
+            </button>
+            <button onClick={() => deleteBook(item.id)}>Delete</button>
+          </li>
+        ))}
       </ul>
-
-      <button type="button" onClick={() => setIsModalOpen(true)}>
-        Create a New Book
-      </button>
 
       {isModalOpen && (
         <Modal
           isOpen={true}
           onRequestClose={closeModal}
-          contentLabel="Create a New Book"
+          contentLabel="Create or Edit Book"
         >
-          <h2>Create a New Book</h2>
+          <h2>{isEditMode ? 'Edit Book' : 'Create a New Book'}</h2>
           <form>
-            <label>Title:</label>
+            <label htmlFor="title">Title:</label>
             <input
               type="text"
+              id="title"
               name="title"
               value={newBook.title}
               onChange={handleInputChange}
             />
             <br />
 
-            <label>Description:</label>
+            <label htmlFor="description">Description:</label>
             <input
               type="text"
+              id="description"
               name="description"
               value={newBook.description}
               onChange={handleInputChange}
             />
             <br />
 
-            <label>Author:</label>
+            <label htmlFor="author">Author:</label>
             <input
               type="text"
+              id="author"
               name="author"
               value={newBook.author}
               onChange={handleInputChange}
             />
             <br />
 
-            <label>Amount:</label>
+            <label htmlFor="amount">Amount:</label>
             <input
               type="text"
+              id="amount"
               name="amount"
               value={newBook.amount}
               onChange={handleInputChange}
             />
             <br />
 
-            <label>Genre:</label>
+            <label htmlFor="genre">Genre:</label>
             <input
               type="text"
+              id="genre"
               name="genre"
               value={newBook.genre}
               onChange={handleInputChange}
             />
             <br />
 
-            <button type="submit" onClick={createBook}>
-              Submit
-            </button>
+            <label htmlFor="poster">Poster:</label>
+            <input
+              type="text"
+              id="Poster"
+              name="Poster"
+              value={newBook.poster}
+              onChange={handleInputChange}
+            />
+            <br />
+
+            {!isEditMode && (
+               <button type="button" onClick={createBook}>
+                 Create
+               </button>
+            )}
+
             <button type="button" onClick={closeModal}>
               Cancel
             </button>
@@ -220,76 +232,77 @@ const handleEditInputChange = (event) => {
 
       {selectedItem && (
         <Modal
-          isOpen={true}
-          onRequestClose={closeModal}
-          contentLabel="Book Details"
-        >
-          <h2>Title: {selectedItem.title}</h2>
-          <p>Description: {selectedItem.description}</p>
-          <p>Author: {selectedItem.author}</p>
-          <p>Amount: {selectedItem.amount}</p>
-          <p>Genre: {selectedItem.genre}</p>
-          
+        isOpen={true}
+        onRequestClose={closeModal}
+        contentLabel="Book Details"
+      >
+        <h2>Title: {selectedItem.title}</h2>
+        <p>Description: {selectedItem.description}</p>
+        <p>Author: {selectedItem.author}</p>
+        <p>Amount: {selectedItem.amount}</p>
+        <p>Genre: {selectedItem.genre}</p>
+        
 
-          <h2>Edit Book</h2>
-          <form>
-            <label>Title:</label>
-            <input
-              type="text"
-              name="title"
-              value={selectedItem.title}
-              onChange={handleEditInputChange}
-            />
-            <br />
+        <h2>Edit Book</h2>
+        <form>
+          <label>Title:</label>
+          <input
+            type="text"
+            name="title"
+            value={selectedItem.title}
+            onChange={handleEditInputChange}
+          />
+          <br />
 
-            <label>Description:</label>
-            <input
-              type="text"
-              name="description"
-              value={selectedItem.description}
-              onChange={handleEditInputChange}
-            />
-            <br />
+          <label>Description:</label>
+          <input
+            type="text"
+            name="description"
+            value={selectedItem.description}
+            onChange={handleEditInputChange}
+          />
+          <br />
 
-            <label>Author:</label>
-            <input
-              type="text"
-              name="author"
-              value={selectedItem.author}
-              onChange={handleEditInputChange}
-            />
-            <br />
+          <label>Author:</label>
+          <input
+            type="text"
+            name="author"
+            value={selectedItem.author}
+            onChange={handleEditInputChange}
+          />
+          <br />
 
-            <label>Poster:</label>
-            <input
-              type="text"
-              name="poster"
-              value={selectedItem.poster}
-              onChange={handleEditInputChange}
-            />
-            <br />
+          <label>Poster:</label>
+          <input
+            type="text"
+            name="poster"
+            value={selectedItem.poster}
+            onChange={handleEditInputChange}
+          />
+          <br />
 
-            <label>Amount:</label>
-            <input
-              type="text"
-              name="amount"
-              value={selectedItem.amount}
-              onChange={handleEditInputChange}
-            />
-            <br />
+          <label>Amount:</label>
+          <input
+            type="text"
+            name="amount"
+            value={selectedItem.amount}
+            onChange={handleEditInputChange}
+          />
+          <br />
 
-            <label>Genre:</label>
-            <input
-              type="text"
-              name="genre"
-              value={selectedItem.genre}
-              onChange={handleEditInputChange}
-            />
-            <br />
-            <button onClick={updateBook}>Update</button>
-          </form>
-          <button onClick={closeModal}>Close</button>
-        </Modal>
+          <label>Genre:</label>
+          <input
+            type="text"
+            name="genre"
+            value={selectedItem.genre}
+            onChange={handleEditInputChange}
+          />
+          <br />
+          <button onClick={updateBook}>Update</button>
+        </form>
+        <button onClick={closeModal}>Close</button>
+      </Modal>
+        
       )}
     </div>
   );
