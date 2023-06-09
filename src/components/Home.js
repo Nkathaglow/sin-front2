@@ -125,7 +125,7 @@ const Home = () => {
       <NavBar />
       <Main />
       <Add />
-      <h1>The Novels</h1>
+      <h1>World of Books</h1>
 
       <div className="search">
  

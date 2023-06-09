@@ -7,7 +7,7 @@
   background-color: #755139FF;
   border: 1px solid #D4B996FF;;
   border-radius: 28px;
-  width: 220px;
+  width: 230px;
 }
 
 .dropdown h2 {
@@ -34,7 +34,7 @@
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #D4B996FF;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .dropdown button[type="submit"] {

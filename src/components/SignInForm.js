@@ -21,7 +21,7 @@ const SignInForm = () => {
   const handleDropdownSubmit = (e) => {
     e.preventDefault();
 
-    // Perform backend API call to store user data
+    
     fetch("http://localhost:9292/users", {
       method: "POST",
       body: JSON.stringify({ first_name: firstName, last_name: lastName, email, password }),
