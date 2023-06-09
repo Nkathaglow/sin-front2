@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import NavBar from './NavBar';
 import './Home.css';
 import Main from './Main';
+import Add from './Add';
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -13,7 +14,7 @@ const Home = () => {
     author: '',
     amount: '',
     genre: '',
-    image_url: ''
+    poster: ''
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -41,34 +42,43 @@ const Home = () => {
         },
         body: JSON.stringify(newBook),
       });
+  
+      if (!response.ok) {
+        throw new Error('Error creating book');
+      }
+  
       const createdBook = await response.json();
-      setData([...data, createdBook]);
+  
+      setData((prevData) => [...prevData, createdBook]);
+  
       setNewBook({
         title: '',
         description: '',
         author: '',
         amount: '',
         genre: '',
-        image_url: ''
+        poster: '',
       });
+  
       closeModal();
     } catch (error) {
       console.error('Error creating book:', error);
     }
   };
+  
 
   const updateBook = async (event) => {
-    event.preventDefault(); // Prevents the default form submission
+    event.preventDefault(); 
   
     try {
-      // Rest of the code...
+      
     } catch (error) {
       console.error('Error updating book:', error);
     }
   };
   
   const handleEditInputChange = (event) => {
-    event.preventDefault(); // Prevents the default form behavior
+    event.preventDefault();
   
     const { name, value } = event.target;
     setSelectedItem((prevItem) => ({
@@ -115,11 +125,14 @@ const Home = () => {
     }));
   };
 
+  
+
   return (
     <div className="Home">
       
       <NavBar />
       <Main />
+      <Add />
       <h1>The Novels</h1>
 
       <div className="search">
@@ -210,8 +223,8 @@ const Home = () => {
             <label htmlFor="poster">Poster:</label>
             <input
               type="text"
-              id="Poster"
-              name="Poster"
+              id="poster"
+              name="poster"
               value={newBook.poster}
               onChange={handleInputChange}
             />
@@ -224,7 +237,7 @@ const Home = () => {
             )}
 
             <button type="button" onClick={closeModal}>
-              Cancel
+              Close
             </button>
           </form>
         </Modal>
