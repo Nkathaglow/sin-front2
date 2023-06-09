@@ -3,7 +3,7 @@
 ### Author : Muriungi Glory Nkatha 7/06/2023
 ****
 ## Project Description
-My application allows the user to sign in to the specific app sending data to the database.It has many cards for display fetching data from the database.It also makes it easier for the user to search for data through the API making the range for the search easier and time-efficient.One is also able to update and delete data from the given books according to the user needs.
+My application allows the user to sign in to the specific app sending data to the database.It has many cards for display fetching data from the database.It also makes it easier for the user to search for data through the API making the range for the search easier and time-efficient.One is also able to update and delete data from the given books according to the user needs.The link for the back-end repository-`https://github.com/Nkathaglow/phase-3-sinatra-react-project`
 ******
 
 ## SCREENSHOTS

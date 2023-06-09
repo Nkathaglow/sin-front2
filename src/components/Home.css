@@ -30,7 +30,7 @@
 }
 
 .Home button:hover {
-  background-color: #9c9999;
+  background-color: transparent;
   transition: transform 0.3s ease;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .Home .modal-content Book Details{
-  background-color: aqua;
+  background-color: transparent;
 }
 
 .Home .modal-content h2 {
